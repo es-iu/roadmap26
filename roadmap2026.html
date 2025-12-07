@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Editor / MV Roadmap 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-panel: #020617;
+      --border-subtle: #1f2937;
+      --accent: #38bdf8;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.8);
+
+      --stream-small: #38bdf8;
+      --stream-large: #22c55e;
+      --stream-av: #f97316;
+      --stream-platform: #a855f7;
+      --accelerated: #ec4899;
+
+      --lane-label-width: 220px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.8rem;
+      letter-spacing: 0.03em;
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      line-height: 1.5;
+    }
+
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    /* Toggle */
+
+    .mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: var(--radius-pill);
+      padding: 6px 10px 6px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.7);
+      cursor: pointer;
+    }
+
+    .mode-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 170px;
+      height: 30px;
+      background: #020617;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      padding: 2px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 2px;
+      bottom: 2px;
+      width: calc(50% - 4px);
+      border-radius: var(--radius-pill);
+      background: radial-gradient(circle at 10% 0, var(--accent) 0, #22d3ee 60%);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.7);
+      transition: transform 0.22s ease;
+    }
+
+    body.mode-fast .toggle-thumb {
+      transform: translateX(100%);
+      background: radial-gradient(circle at 10% 0, #f97316 0, #a855f7 70%);
+      box-shadow: 0 8px 22px rgba(249, 115, 22, 0.8);
+    }
+
+    .toggle-option {
+      position: relative;
+      flex: 1;
+      font-size: 0.72rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 1;
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    body.mode-current .toggle-option[data-mode="current"],
+    body.mode-fast .toggle-option[data-mode="fast"] {
+      color: #f9fafb;
+      font-weight: 600;
+    }
+
+    /* Legend */
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .legend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px dashed rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.small { background: var(--stream-small); }
+    .legend-dot.large { background: var(--stream-large); }
+    .legend-dot.av { background: var(--stream-av); }
+    .legend-dot.platform { background: var(--stream-platform); }
+    .legend-dot.accelerated { background: var(--accelerated); }
+
+    /* Roadmap shell */
+
+    .roadmap-shell {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #020617, #020617 55%, #0b1120);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .quarters-row {
+      margin-left: var(--lane-label-width);
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0 8px 12px;
+      border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+      margin-bottom: 6px;
+    }
+
+    .quarter-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .quarter-title {
+      display: block;
+      font-size: 0.92rem;
+      letter-spacing: 0.14em;
+      margin-bottom: 2px;
+    }
+
+    .quarter-title.mode-fast-label,
+    .quarter-subtitle.mode-fast-label {
+      display: none;
+    }
+
+    .quarter-subtitle {
+      font-size: 0.78rem;
+      text-transform: none;
+      letter-spacing: 0.03em;
+    }
+
+    body.mode-fast .quarter-title.mode-current-label,
+    body.mode-fast .quarter-subtitle.mode-current-label {
+      display: none;
+    }
+
+    body.mode-fast .quarter-title.mode-fast-label,
+    body.mode-fast .quarter-subtitle.mode-fast-label {
+      display: block;
+    }
+
+    .lanes {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .lane {
+      display: flex;
+      gap: 18px;
+      padding: 10px 8px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .lane-label {
+      position: relative;
+      width: var(--lane-label-width);
+      padding-left: 18px;
+    }
+
+    .lane-label-title {
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .lane-label-subtitle {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .lane-label-stream {
+      margin-top: 6px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.9;
+    }
+
+    .lane-color-bar {
+      position: absolute;
+      left: 0;
+      top: 2px;
+      bottom: 2px;
+      width: 4px;
+      border-radius: 999px;
+    }
+
+    .lane.stream-small .lane-color-bar { background: var(--stream-small); }
+    .lane.stream-large .lane-color-bar { background: var(--stream-large); }
+    .lane.stream-av .lane-color-bar { background: var(--stream-av); }
+    .lane.stream-platform .lane-color-bar { background: var(--stream-platform); }
+
+    .lane-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    /* Cards */
+
+    .roadmap-item {
+      position: relative;
+      padding: 8px 10px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.18) 0, #020617 60%);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.9);
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-height: 64px;
+    }
+.roadmap-item {
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+
+    .stream-small .roadmap-item { border-left: 3px solid var(--stream-small); }
+    .stream-large .roadmap-item { border-left: 3px solid var(--stream-large); }
+    .stream-av .roadmap-item { border-left: 3px solid var(--stream-av); }
+    .stream-platform .roadmap-item { border-left: 3px solid var(--stream-platform); }
+
+    .item-title {
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .item-body {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .item-body ul {
+      margin: 3px 0 0;
+      padding-left: 14px;
+    }
+
+    .item-body li { margin-bottom: 1px; }
+
+    .item-tag {
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      align-self: flex-start;
+      margin-top: 2px;
+      color: var(--text-muted);
+    }
+
+    /* Accelerated */
+
+    .roadmap-item[data-accelerated="true"]::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      border: 1px solid rgba(236, 72, 153, 0.4);
+      box-shadow: 0 0 0 1px rgba(236, 72, 153, 0.3),
+                  0 0 26px rgba(236, 72, 153, 0.7);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    body.mode-fast .roadmap-item[data-accelerated="true"]::before {
+      opacity: 1;
+    }
+
+    .accelerated-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      font-size: 0.66rem;
+      border: 1px solid rgba(236, 72, 153, 0.7);
+      background: rgba(236, 72, 153, 0.18);
+      color: #fdf2f8;
+      margin-top: 3px;
+    }
+
+    .baseline-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      font-size: 0.66rem;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .baseline-pill strong { color: var(--text-main); }
+
+/* CURRENT MODE — timeline titles and subtitles should be white */
+body.mode-current .quarter-label .quarter-title.mode-current-label,
+body.mode-current .quarter-label .quarter-subtitle.mode-current-label {
+  color: #ffffff !important;
+}
+
+/* Highlight the merged Q3–Q4 quarter when in Fast mode */
+body.mode-fast .quarter-label.fast-emphasis .quarter-title.mode-fast-label {
+  font-weight: 600;            /* 🔥 Bold the quarter title */
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(249,115,22,0.45);
+  font-size: 1.05rem;
+}
+
+body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
+  font-weight: 400;            /* 🔥 Bold the subtitle text */
+  color: #fdf2f8;
+  text-shadow: 0 0 6px rgba(251,191,36,0.35);
+  font-size: 0.88rem;
+}
+
+/* FAST MODE — highlight only accelerated portion in Q1 */
+body.mode-fast .accelerated-text {
+  color: #ffffff !important;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(255,255,255,0.35);
+}
+
+/* FAST MODE — de-emphasize non-accelerated Q1 text */
+body.mode-fast .quarter-label:nth-child(1) .quarter-subtitle.mode-fast-label {
+  color: rgba(255,255,255,0.45) !important;
+}
+body.mode-fast .quarter-label:nth-child(1) .accelerated-text {
+  color: #fff !important;
+}
+
+/* FAST MODE — Q2 gets muted (not accelerated) */
+body.mode-fast .quarter-label.quarter-q2 .quarter-subtitle.mode-fast-label,
+body.mode-fast .quarter-label.quarter-q2 .quarter-title.mode-fast-label {
+  color: rgba(255,255,255,0.35) !important;
+  font-weight: 400 !important;
+}
+
+/* FAST MODE — keep your original softer Q3–Q4 emphasis */
+body.mode-fast .quarter-label.fast-emphasis .quarter-title.mode-fast-label {
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(249,115,22,0.45);
+  font-size: 1.05rem;
+}
+
+body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
+  font-weight: 400;
+  color: #fdf2f8;
+  text-shadow: 0 0 6px rgba(251,191,36,0.35);
+  font-size: 0.88rem;
+}
+
+
+    @media (max-width: 980px) {
+      :root { --lane-label-width: 190px; }
+    }
+
+    @media (max-width: 860px) {
+      .roadmap-shell { padding: 14px; }
+      .quarters-row {
+        margin-left: 0;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .lane {
+        flex-direction: column;
+      }
+      .lane-label {
+        width: 100%;
+      }
+      .lane-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+      .quarters-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .lane-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body class="mode-current">
+  <div class="page">
+    <div class="header-row">
+      <div>
+        <h1>AI Editor &amp; MV Roadmap – 2026</h1>
+        <p class="subtitle">
+          Ticket-level view of key deliveries across streams. Toggle between
+          <strong>Current</strong> and <strong>Fast (with extra DS)</strong> to
+          see which items pull forward.
+        </p>
+      </div>
+
+      <div class="mode-toggle" id="modeToggle">
+        <div class="mode-label">View</div>
+        <div class="toggle-switch">
+          <div class="toggle-thumb"></div>
+          <div class="toggle-option" data-mode="current">Current</div>
+          <div class="toggle-option" data-mode="fast">Fast + DS</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-pill"><div class="legend-dot small"></div>Small revisions stream</div>
+      <div class="legend-pill"><div class="legend-dot large"></div>Large revisions / KNS stream</div>
+      <div class="legend-pill"><div class="legend-dot av"></div>Audiovisual &amp; new productions</div>
+      <div class="legend-pill"><div class="legend-dot platform"></div>Platform &amp; data / TEAQ</div>
+      <div class="legend-pill"><div class="legend-dot accelerated"></div>Moved earlier in FAST view</div>
+    </div>
+
+    <div class="roadmap-shell">
+      <!-- QUARTERS ROW -->
+      <div class="quarters-row">
+        <div class="quarter-label">
+          <span class="quarter-title mode-current-label">Q1 2026</span>
+          <span class="quarter-title mode-fast-label">Q1 2026</span>
+          <div class="quarter-subtitle mode-current-label">
+            Foundations &amp; Small Revision Roll-out
+          </div>
+<div class="quarter-subtitle mode-fast-label">
+  Foundations, Small Revision Roll-out,
+  <span class="accelerated-text">&amp; AI-Powered Revision Suggestions</span>
+</div>
+        </div>
+
+        <div class="quarter-label">
+          <span class="quarter-title mode-current-label">Q2 2026</span>
+          <span class="quarter-title mode-fast-label">Q2 2026</span>
+          <div class="quarter-subtitle mode-current-label">
+            Small Revisions Fully Rolled-out &amp; AI Editor &amp; Automations
+          </div>
+          <div class="quarter-subtitle mode-fast-label">
+            Small Revisions Fully Rolled-out &amp; AI Editor &amp; Automations
+          </div>
+        </div>
+
+<div class="quarter-label fast-emphasis">
+          <span class="quarter-title mode-current-label">Q3 2026</span>
+          <span class="quarter-title mode-fast-label">Q3–Q4 2026</span>
+          <div class="quarter-subtitle mode-current-label">
+            MV-led Large Revisions, AI-Powered Revision Suggestions &amp; New Production Prep
+          </div>
+          <div class="quarter-subtitle mode-fast-label">
+            MV-led Large Revisions &amp; New Productions with Audiovisual
+          </div>
+        </div>
+
+<div class="quarter-label">
+  <!-- Baseline view still shows Q4 2026 / 2027 -->
+  <span class="quarter-title mode-current-label">Q4 2026 / 2027</span>
+  <div class="quarter-subtitle mode-current-label">
+    Audiovisual &amp; New Productions
+  </div>
+
+  <!-- Fast + DS view: visually empty, so last visible bucket is Q3–Q4 2026 -->
+  <span class="quarter-title mode-fast-label">&nbsp;</span>
+  <div class="quarter-subtitle mode-fast-label"></div>
+</div>
+
+
+        </div>
+      </div>
+
+
+
+
+      <div class="lanes">
+        <!-- SMALL REVISIONS -->
+        <div class="lane stream-small">
+          <div class="lane-label">
+            <div class="lane-color-bar"></div>
+            <div class="lane-label-title">Small Revisions &amp; MV Workflows</div>
+            <div class="lane-label-subtitle">
+              Make MV teams self-sufficient for small text / image / reference
+              changes, with AI suggestions layered in.
+            </div>
+            <div class="lane-label-stream">Stream · Small Revisions</div>
+          </div>
+          <div class="lane-grid">
+            <div class="roadmap-item"
+                 data-quarter-current="1" data-span-current="1"
+                 data-quarter-fast="1" data-span-fast="1">
+              <div class="item-title">Training workflow redesign</div>
+              <div class="item-body">
+                <ul>
+                  <li>Shift TEAQ training from MP editors to AI team / embedded editor</li>
+                  <li>Design MV-first training materials and playbooks</li>
+                </ul>
+              </div>
+              <div class="item-tag">Foundations</div>
+            </div>
+
+            <div class="roadmap-item"
+                 data-quarter-current="1" data-span-current="1"
+                 data-quarter-fast="1" data-span-fast="1">
+              <div class="item-title">Image &amp; reference pipelines</div>
+              <div class="item-body">
+                <ul>
+                  <li>External MD workflow for light image updates</li>
+                  <li>Automation for MV ↔ Library Services reference changes</li>
+                </ul>
+              </div>
+              <div class="item-tag">Workflows</div>
+            </div>
+
+            <div class="roadmap-item"
+                 data-quarter-current="3" data-span-current="1"
+                 data-quarter-fast="1" data-span-fast="1"
+                 data-accelerated="true">
+              <div class="item-title">AI-powered revision suggestions</div>
+              <div class="item-body">
+                <ul>
+                  <li>Inline suggestions based on KNS risk &amp; style rules</li>
+                  <li>Feedback loop for continuous quality improvement</li>
+                </ul>
+              </div>
+              <div class="accelerated-pill">
+                <strong>Pulled forward</strong>
+                <span>Q3 → Q1 with DS</span>
+              </div>
+              <div class="baseline-pill">
+                Baseline timing: <strong>Q3 2026</strong>
+              </div>
+            </div>
+
+            <div class="roadmap-item"
+                 data-quarter-current="2" data-span-current="1"
+                 data-quarter-fast="2" data-span-fast="1">
+              <div class="item-title">Full MV rollout for small revisions</div>
+              <div class="item-body">
+                <ul>
+                  <li>All text-only changes fully MV-led</li>
+                  <li>Image &amp; reference workflows live across catalog</li>
+                </ul>
+              </div>
+              <div class="item-tag">Roll-out</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LARGE REVISIONS -->
+        <div class="lane stream-large">
+          <div class="lane-label">
+            <div class="lane-color-bar"></div>
+            <div class="lane-label-title">Large Revisions / KNS</div>
+            <div class="lane-label-subtitle">
+              5-step KNS pipeline: MP drives recruiting &amp; alignment, AI
+              EduPlatform drives editorial + automation.
+            </div>
+            <div class="lane-label-stream">Stream · Large Revisions</div>
+          </div>
+          <div class="lane-grid">
+            <div class="roadmap-item"
+                 data-quarter-current="1" data-span-current="1"
+                 data-quarter-fast="1" data-span-fast="1">
+              <div class="item-title">KNS course identification &amp; recruiting</div>
+              <div class="item-body">
+                <ul>
+                  <li>QM algorithm surfaces at-risk courses</li>
+                  <li>Automated recruiting &amp; broadcast templates</li>
+                </ul>
+              </div>
+              <div class="item-tag">MP</div>
+            </div>
+
+            <div class="roadmap-item"
+                 data-quarter-current="2" data-span-current="1"
+                 data-quarter-fast="2" data-span-fast="1">
+              <div class="item-title">AI Editor v1 in KNS editorial step</div>
+              <div class="item-body">
+                <ul>
+                  <li>Finalize AI Editor PoC into v1</li>
+                  <li>Integrate into Large Revision editorial workflow</li>
+                </ul>
+              </div>
+              <div class="item-tag">AI EduPlatform</div>
+            </div>
+
+            <div class="roadmap-item"
+                 data-quarter-current="3" data-span-current="1"
+                 data-quarter-fast="3" data-span-fast="2">
+              <div class="item-title">MV-led Large Revisions live</div>
+              <div class="item-body">
+                <ul>
+                  <li>End-to-end Large Revision flow live for MV teams</li>
+                  <li>Dashboards for KNS throughput &amp; quality</li>
+                </ul>
+              </div>
+              <div class="item-tag">Go-Live</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AUDIOVISUAL & NEW PRODUCTIONS -->
+        <div class="lane stream-av">
+          <div class="lane-label">
+            <div class="lane-color-bar"></div>
+            <div class="lane-label-title">Audiovisual &amp; New Productions</div>
+            <div class="lane-label-subtitle">
+              Automation for Media Design &amp; Video Coach, plus integrated
+              video solution and MV-led new course production.
+            </div>
+            <div class="lane-label-stream">Stream · AV &amp; New Production</div>
+          </div>
+          <div class="lane-grid">
+            <div class="roadmap-item"
+                 data-quarter-current="1" data-span-current="1"
+                 data-quarter-fast="1" data-span-fast="1">
+              <div class="item-title">AV workflow design for MV context</div>
+              <div class="item-body">
+                <ul>
+                  <li>Define MD / Video Coach interfaces to QM &amp; MV tools</li>
+                  <li>Standardize assets &amp; templates</li>
+                </ul>
+              </div>
+              <div class="item-tag">Design</div>
+            </div>
+
+            <div class="roadmap-item"
+                 data-quarter-current="4" data-span-current="1"
+                 data-quarter-fast="3" data-span-fast="2"
+                 data-accelerated="true">
+              <div class="item-title">Audiovisual automation &amp; MV-led new productions</div>
+              <div class="item-body">
+                <ul>
+                  <li>Automation for key MD / Video Coach tasks</li>
+                  <li>MV-led New Course Production workflow live</li>
+                  <li>Integrated video solution used for Large Revisions &amp; new courses</li>
+                </ul>
+              </div>
+              <div class="accelerated-pill">
+                <strong>Pulled forward</strong>
+                <span>Early 2027 → H2 2026 with DS</span>
+              </div>
+              <div class="baseline-pill">
+                Baseline timing: <strong>Q4 2026 / Early 2027</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLATFORM & DATA / TEAQ -->
+        <div class="lane stream-platform">
+          <div class="lane-label">
+            <div class="lane-color-bar"></div>
+            <div class="lane-label-title">Platform, Data &amp; TEAQ Replacement</div>
+            <div class="lane-label-subtitle">
+              Fonto and content pipelines, LMS/PLF migrations, and TEAQ
+              decommissioning.
+            </div>
+            <div class="lane-label-stream">Stream · Platform &amp; Data</div>
+          </div>
+          <div class="lane-grid">
+            <div class="roadmap-item"
+                 data-quarter-current="1" data-span-current="1"
+                 data-quarter-fast="1" data-span-fast="1">
+              <div class="item-title">Fonto &amp; post-MVP pipelines</div>
+              <div class="item-body">
+                <ul>
+                  <li>Complete key Fonto features</li>
+                  <li>Stabilize post-MVP content ingestion &amp; export</li>
+                </ul>
+              </div>
+              <div class="item-tag">Editor Platform</div>
+            </div>
+
+            <div class="roadmap-item"
+                 data-quarter-current="2" data-span-current="1"
+                 data-quarter-fast="2" data-span-fast="1">
+              <div class="item-title">LMS &amp; PLF migrations</div>
+              <div class="item-body">
+                <ul>
+                  <li>Migrate and auto-publish LMS questions</li>
+                  <li>PLF auto-publish in sync with Large Revisions</li>
+                </ul>
+              </div>
+              <div class="item-tag">Migrations</div>
+            </div>
+
+            <div class="roadmap-item"
+                 data-quarter-current="4" data-span-current="1"
+                 data-quarter-fast="3" data-span-fast="2"
+                 data-accelerated="true">
+              <div class="item-title">TEAQ decommissioning &amp; book automation</div>
+              <div class="item-body">
+                <ul>
+                  <li>Auto-create course &amp; review books from source content</li>
+                  <li>TEAQ decommissioned in H2 2026 (vs 2027)</li>
+                </ul>
+              </div>
+              <div class="accelerated-pill">
+                <strong>Pulled forward</strong>
+                <span>Early 2027 → H2 2026 with DS</span>
+              </div>
+              <div class="baseline-pill">
+                Baseline timing: <strong>Early 2027</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const body = document.body;
+    const toggle = document.getElementById("modeToggle");
+
+    function applyLayout() {
+      const mode = body.classList.contains("mode-fast") ? "fast" : "current";
+      document.querySelectorAll(".roadmap-item").forEach((el) => {
+        const qAttr = el.getAttribute(
+          mode === "fast" ? "data-quarter-fast" : "data-quarter-current"
+        );
+        const spanAttr = el.getAttribute(
+          mode === "fast" ? "data-span-fast" : "data-span-current"
+        );
+        const col = qAttr ? parseInt(qAttr, 10) : 1;
+        const span = spanAttr ? parseInt(spanAttr, 10) : 1;
+        el.style.gridColumn = col + " / span " + span;
+      });
+    }
+
+    toggle.addEventListener("click", () => {
+      if (body.classList.contains("mode-current")) {
+        body.classList.remove("mode-current");
+        body.classList.add("mode-fast");
+      } else {
+        body.classList.remove("mode-fast");
+        body.classList.add("mode-current");
+      }
+      applyLayout();
+    });
+
+    // initial
+    applyLayout();
+  </script>
+
+
+</body>
+</html>
+
+
+
