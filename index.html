@@ -296,12 +296,11 @@
       gap: 4px;
       min-height: 64px;
     }
-.roadmap-item {
-  transition:
-    transform 0.35s ease,
-    opacity 0.35s ease;
-}
-
+    .roadmap-item {
+      transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+    }
 
     .stream-small .roadmap-item { border-left: 3px solid var(--stream-small); }
     .stream-large .roadmap-item { border-left: 3px solid var(--stream-large); }
@@ -386,64 +385,56 @@
 
     .baseline-pill strong { color: var(--text-main); }
 
-/* CURRENT MODE — timeline titles and subtitles should be white */
-body.mode-current .quarter-label .quarter-title.mode-current-label,
-body.mode-current .quarter-label .quarter-subtitle.mode-current-label {
-  color: #ffffff !important;
-}
+    /* CURRENT MODE — timeline titles and subtitles should be white */
+    body.mode-current .quarter-label .quarter-title.mode-current-label,
+    body.mode-current .quarter-label .quarter-subtitle.mode-current-label {
+      color: #ffffff !important;
+    }
 
-/* Highlight the merged Q3–Q4 quarter when in Fast mode */
-body.mode-fast .quarter-label.fast-emphasis .quarter-title.mode-fast-label {
-  font-weight: 600;            /* 🔥 Bold the quarter title */
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(249,115,22,0.45);
-  font-size: 1.05rem;
-}
+    /* Highlight the merged Q3–Q4 quarter when in Fast mode */
+    body.mode-fast .quarter-label.fast-emphasis .quarter-title.mode-fast-label {
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(249,115,22,0.45);
+      font-size: 1.05rem;
+    }
 
-body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
-  font-weight: 400;            /* 🔥 Bold the subtitle text */
-  color: #fdf2f8;
-  text-shadow: 0 0 6px rgba(251,191,36,0.35);
-  font-size: 0.88rem;
-}
+    body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
+      font-weight: 400;
+      color: #fdf2f8;
+      text-shadow: 0 0 6px rgba(251,191,36,0.35);
+      font-size: 0.88rem;
+    }
 
-/* FAST MODE — highlight only accelerated portion in Q1 */
-body.mode-fast .accelerated-text {
-  color: #ffffff !important;
-  font-weight: 600;
-  text-shadow: 0 0 6px rgba(255,255,255,0.35);
-}
+    /* FAST MODE — highlight only accelerated portion in Q1 */
+    body.mode-fast .accelerated-text {
+      color: #ffffff !important;
+      font-weight: 600;
+      text-shadow: 0 0 6px rgba(255,255,255,0.35);
+    }
 
-/* FAST MODE — de-emphasize non-accelerated Q1 text */
-body.mode-fast .quarter-label:nth-child(1) .quarter-subtitle.mode-fast-label {
-  color: rgba(255,255,255,0.45) !important;
-}
-body.mode-fast .quarter-label:nth-child(1) .accelerated-text {
-  color: #fff !important;
-}
+    /* FAST MODE — de-emphasize non-accelerated Q1 text */
+    body.mode-fast .quarter-label:nth-child(1) .quarter-subtitle.mode-fast-label {
+      color: rgba(255,255,255,0.45) !important;
+    }
+    body.mode-fast .quarter-label:nth-child(1) .accelerated-text {
+      color: #fff !important;
+    }
 
-/* FAST MODE — Q2 gets muted (not accelerated) */
-body.mode-fast .quarter-label.quarter-q2 .quarter-subtitle.mode-fast-label,
-body.mode-fast .quarter-label.quarter-q2 .quarter-title.mode-fast-label {
-  color: rgba(255,255,255,0.35) !important;
-  font-weight: 400 !important;
-}
+    /* FAST MODE — keep softer Q3–Q4 emphasis */
+    body.mode-fast .quarter-label.fast-emphasis .quarter-title.mode-fast-label {
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(249,115,22,0.45);
+      font-size: 1.05rem;
+    }
 
-/* FAST MODE — keep your original softer Q3–Q4 emphasis */
-body.mode-fast .quarter-label.fast-emphasis .quarter-title.mode-fast-label {
-  font-weight: 600;
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(249,115,22,0.45);
-  font-size: 1.05rem;
-}
-
-body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
-  font-weight: 400;
-  color: #fdf2f8;
-  text-shadow: 0 0 6px rgba(251,191,36,0.35);
-  font-size: 0.88rem;
-}
-
+    body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
+      font-weight: 400;
+      color: #fdf2f8;
+      text-shadow: 0 0 6px rgba(251,191,36,0.35);
+      font-size: 0.88rem;
+    }
 
     @media (max-width: 980px) {
       :root { --lane-label-width: 190px; }
@@ -501,7 +492,7 @@ body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
 
     <div class="legend">
       <div class="legend-pill"><div class="legend-dot small"></div>Small revisions stream</div>
-      <div class="legend-pill"><div class="legend-dot large"></div>Large revisions / KNS stream</div>
+      <div class="legend-pill"><div class="legend-dot large"></div>MV-led Large revisions / KNS stream</div>
       <div class="legend-pill"><div class="legend-dot av"></div>Audiovisual &amp; new productions</div>
       <div class="legend-pill"><div class="legend-dot platform"></div>Platform &amp; data / TEAQ</div>
       <div class="legend-pill"><div class="legend-dot accelerated"></div>Moved earlier in FAST view</div>
@@ -516,10 +507,10 @@ body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
           <div class="quarter-subtitle mode-current-label">
             Foundations &amp; Small Revision Roll-out
           </div>
-<div class="quarter-subtitle mode-fast-label">
-  Foundations, Small Revision Roll-out,
-  <span class="accelerated-text">&amp; AI-Powered Revision Suggestions</span>
-</div>
+          <div class="quarter-subtitle mode-fast-label">
+            Foundations, Small Revision Roll-out,
+            <span class="accelerated-text">&amp; AI-Powered Revision Suggestions</span>
+          </div>
         </div>
 
         <div class="quarter-label">
@@ -533,7 +524,7 @@ body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
           </div>
         </div>
 
-<div class="quarter-label fast-emphasis">
+        <div class="quarter-label fast-emphasis">
           <span class="quarter-title mode-current-label">Q3 2026</span>
           <span class="quarter-title mode-fast-label">Q3–Q4 2026</span>
           <div class="quarter-subtitle mode-current-label">
@@ -544,264 +535,254 @@ body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
           </div>
         </div>
 
-<div class="quarter-label">
-  <!-- Baseline view still shows Q4 2026 / 2027 -->
-  <span class="quarter-title mode-current-label">Q4 2026 / 2027</span>
-  <div class="quarter-subtitle mode-current-label">
-    Audiovisual &amp; New Productions
-  </div>
+        <div class="quarter-label">
+          <!-- Baseline view still shows Q4 2026 / 2027 -->
+          <span class="quarter-title mode-current-label">Q4 2026 / 2027</span>
+          <div class="quarter-subtitle mode-current-label">
+            Audiovisual &amp; New Productions
+          </div>
 
-  <!-- Fast + DS view: visually empty, so last visible bucket is Q3–Q4 2026 -->
-  <span class="quarter-title mode-fast-label">&nbsp;</span>
-  <div class="quarter-subtitle mode-fast-label"></div>
-</div>
-
-
+          <!-- Fast + DS view: visually empty, so last visible bucket is Q3–Q4 2026 -->
+          <span class="quarter-title mode-fast-label">&nbsp;</span>
+          <div class="quarter-subtitle mode-fast-label"></div>
         </div>
       </div>
 
+    <div class="lanes">
 
-
-
-      <div class="lanes">
-        <!-- SMALL REVISIONS -->
-        <div class="lane stream-small">
-          <div class="lane-label">
-            <div class="lane-color-bar"></div>
-            <div class="lane-label-title">Small Revisions &amp; MV Workflows</div>
-            <div class="lane-label-subtitle">
-              Make MV teams self-sufficient for small text / image / reference
-              changes, with AI suggestions layered in.
-            </div>
-            <div class="lane-label-stream">Stream · Small Revisions</div>
-          </div>
-          <div class="lane-grid">
-            <div class="roadmap-item"
-                 data-quarter-current="1" data-span-current="1"
-                 data-quarter-fast="1" data-span-fast="1">
-              <div class="item-title">Training workflow redesign</div>
-              <div class="item-body">
-                <ul>
-                  <li>Shift TEAQ training from MP editors to AI team / embedded editor</li>
-                  <li>Design MV-first training materials and playbooks</li>
-                </ul>
-              </div>
-              <div class="item-tag">Foundations</div>
-            </div>
-
-            <div class="roadmap-item"
-                 data-quarter-current="1" data-span-current="1"
-                 data-quarter-fast="1" data-span-fast="1">
-              <div class="item-title">Image &amp; reference pipelines</div>
-              <div class="item-body">
-                <ul>
-                  <li>External MD workflow for light image updates</li>
-                  <li>Automation for MV ↔ Library Services reference changes</li>
-                </ul>
-              </div>
-              <div class="item-tag">Workflows</div>
-            </div>
-
-            <div class="roadmap-item"
-                 data-quarter-current="3" data-span-current="1"
-                 data-quarter-fast="1" data-span-fast="1"
-                 data-accelerated="true">
-              <div class="item-title">AI-powered revision suggestions</div>
-              <div class="item-body">
-                <ul>
-                  <li>Inline suggestions based on KNS risk &amp; style rules</li>
-                  <li>Feedback loop for continuous quality improvement</li>
-                </ul>
-              </div>
-              <div class="accelerated-pill">
-                <strong>Pulled forward</strong>
-                <span>Q3 → Q1 with DS</span>
-              </div>
-              <div class="baseline-pill">
-                Baseline timing: <strong>Q3 2026</strong>
-              </div>
-            </div>
-
-            <div class="roadmap-item"
-                 data-quarter-current="2" data-span-current="1"
-                 data-quarter-fast="2" data-span-fast="1">
-              <div class="item-title">Full MV rollout for small revisions</div>
-              <div class="item-body">
-                <ul>
-                  <li>All text-only changes fully MV-led</li>
-                  <li>Image &amp; reference workflows live across catalog</li>
-                </ul>
-              </div>
-              <div class="item-tag">Roll-out</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- LARGE REVISIONS -->
-        <div class="lane stream-large">
-          <div class="lane-label">
-            <div class="lane-color-bar"></div>
-            <div class="lane-label-title">Large Revisions / KNS</div>
-            <div class="lane-label-subtitle">
-              5-step KNS pipeline: MP drives recruiting &amp; alignment, AI
-              EduPlatform drives editorial + automation.
-            </div>
-            <div class="lane-label-stream">Stream · Large Revisions</div>
-          </div>
-          <div class="lane-grid">
-            <div class="roadmap-item"
-                 data-quarter-current="1" data-span-current="1"
-                 data-quarter-fast="1" data-span-fast="1">
-              <div class="item-title">KNS course identification &amp; recruiting</div>
-              <div class="item-body">
-                <ul>
-                  <li>QM algorithm surfaces at-risk courses</li>
-                  <li>Automated recruiting &amp; broadcast templates</li>
-                </ul>
-              </div>
-              <div class="item-tag">MP</div>
-            </div>
-
-            <div class="roadmap-item"
-                 data-quarter-current="2" data-span-current="1"
-                 data-quarter-fast="2" data-span-fast="1">
-              <div class="item-title">AI Editor v1 in KNS editorial step</div>
-              <div class="item-body">
-                <ul>
-                  <li>Finalize AI Editor PoC into v1</li>
-                  <li>Integrate into Large Revision editorial workflow</li>
-                </ul>
-              </div>
-              <div class="item-tag">AI EduPlatform</div>
-            </div>
-
-            <div class="roadmap-item"
-                 data-quarter-current="3" data-span-current="1"
-                 data-quarter-fast="3" data-span-fast="2">
-              <div class="item-title">MV-led Large Revisions live</div>
-              <div class="item-body">
-                <ul>
-                  <li>End-to-end Large Revision flow live for MV teams</li>
-                  <li>Dashboards for KNS throughput &amp; quality</li>
-                </ul>
-              </div>
-              <div class="item-tag">Go-Live</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- AUDIOVISUAL & NEW PRODUCTIONS -->
-        <div class="lane stream-av">
-          <div class="lane-label">
-            <div class="lane-color-bar"></div>
-            <div class="lane-label-title">Audiovisual &amp; New Productions</div>
-            <div class="lane-label-subtitle">
-              Automation for Media Design &amp; Video Coach, plus integrated
-              video solution and MV-led new course production.
-            </div>
-            <div class="lane-label-stream">Stream · AV &amp; New Production</div>
-          </div>
-          <div class="lane-grid">
-            <div class="roadmap-item"
-                 data-quarter-current="1" data-span-current="1"
-                 data-quarter-fast="1" data-span-fast="1">
-              <div class="item-title">AV workflow design for MV context</div>
-              <div class="item-body">
-                <ul>
-                  <li>Define MD / Video Coach interfaces to QM &amp; MV tools</li>
-                  <li>Standardize assets &amp; templates</li>
-                </ul>
-              </div>
-              <div class="item-tag">Design</div>
-            </div>
-
-            <div class="roadmap-item"
-                 data-quarter-current="4" data-span-current="1"
-                 data-quarter-fast="3" data-span-fast="2"
-                 data-accelerated="true">
-              <div class="item-title">Audiovisual automation &amp; MV-led new productions</div>
-              <div class="item-body">
-                <ul>
-                  <li>Automation for key MD / Video Coach tasks</li>
-                  <li>MV-led New Course Production workflow live</li>
-                  <li>Integrated video solution used for Large Revisions &amp; new courses</li>
-                </ul>
-              </div>
-              <div class="accelerated-pill">
-                <strong>Pulled forward</strong>
-                <span>Early 2027 → H2 2026 with DS</span>
-              </div>
-              <div class="baseline-pill">
-                Baseline timing: <strong>Q4 2026 / Early 2027</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PLATFORM & DATA / TEAQ -->
-        <div class="lane stream-platform">
-          <div class="lane-label">
-            <div class="lane-color-bar"></div>
-            <div class="lane-label-title">Platform, Data &amp; TEAQ Replacement</div>
-            <div class="lane-label-subtitle">
-              Fonto and content pipelines, LMS/PLF migrations, and TEAQ
-              decommissioning.
-            </div>
-            <div class="lane-label-stream">Stream · Platform &amp; Data</div>
-          </div>
-          <div class="lane-grid">
-            <div class="roadmap-item"
-                 data-quarter-current="1" data-span-current="1"
-                 data-quarter-fast="1" data-span-fast="1">
-              <div class="item-title">Fonto &amp; post-MVP pipelines</div>
-              <div class="item-body">
-                <ul>
-                  <li>Complete key Fonto features</li>
-                  <li>Stabilize post-MVP content ingestion &amp; export</li>
-                </ul>
-              </div>
-              <div class="item-tag">Editor Platform</div>
-            </div>
-
-            <div class="roadmap-item"
-                 data-quarter-current="2" data-span-current="1"
-                 data-quarter-fast="2" data-span-fast="1">
-              <div class="item-title">LMS &amp; PLF migrations</div>
-              <div class="item-body">
-                <ul>
-                  <li>Migrate and auto-publish LMS questions</li>
-                  <li>PLF auto-publish in sync with Large Revisions</li>
-                </ul>
-              </div>
-              <div class="item-tag">Migrations</div>
-            </div>
-
-            <div class="roadmap-item"
-                 data-quarter-current="4" data-span-current="1"
-                 data-quarter-fast="3" data-span-fast="2"
-                 data-accelerated="true">
-              <div class="item-title">TEAQ decommissioning &amp; book automation</div>
-              <div class="item-body">
-                <ul>
-                  <li>Auto-create course &amp; review books from source content</li>
-                  <li>TEAQ decommissioned in H2 2026 (vs 2027)</li>
-                </ul>
-              </div>
-              <div class="accelerated-pill">
-                <strong>Pulled forward</strong>
-                <span>Early 2027 → H2 2026 with DS</span>
-              </div>
-              <div class="baseline-pill">
-                Baseline timing: <strong>Early 2027</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
+  <!-- SMALL REVISIONS -->
+  <div class="lane stream-small">
+    <div class="lane-label">
+      <div class="lane-color-bar"></div>
+      <div class="lane-label-title">MV-led Small Revisions</div>
+      <div class="lane-label-subtitle">
+        Make MV teams self-sufficient for small text / image / reference
+        changes, with AI suggestions layered in.
       </div>
+      <div class="lane-label-stream">Stream · Small Revisions</div>
+    </div>
+
+    <div class="lane-grid">
+
+      <!-- Image & reference pipelines -->
+      <div class="roadmap-item"
+           data-quarter-current="1" data-span-current="1"
+           data-quarter-fast="1" data-span-fast="1">
+        <div class="item-title">Image &amp; reference pipelines</div>
+        <div class="item-body">
+          <ul>
+            <li>External MD workflow for light image updates</li>
+            <li>Automation for MV ↔ Library Services reference changes</li>
+          </ul>
+        </div>
+        <div class="item-tag">Workflows</div>
+      </div>
+
+      <!-- AI-powered revision suggestions -->
+      <div class="roadmap-item"
+           data-quarter-current="3" data-span-current="1"
+           data-quarter-fast="1" data-span-fast="1"
+           data-accelerated="true">
+        <div class="item-title">AI-powered revision suggestions</div>
+        <div class="item-body">
+          <ul>
+            <li>Inline suggestions based on KNS risk &amp; style rules</li>
+            <li>Feedback loop for continuous quality improvement</li>
+          </ul>
+        </div>
+        <div class="accelerated-pill">
+          <strong>Pulled forward</strong>
+          <span>Q3 → Q1 with DS</span>
+        </div>
+        <div class="baseline-pill">
+          Baseline timing: <strong>Q3 2026</strong>
+        </div>
+      </div>
+
+      <!-- Full MV rollout - small revisions -->
+      <div class="roadmap-item"
+           data-quarter-current="2" data-span-current="1"
+           data-quarter-fast="2" data-span-fast="1">
+        <div class="item-title">Full MV rollout for small revisions</div>
+        <div class="item-body">
+          <ul>
+            <li>All text-only changes fully MV-led</li>
+            <li>Image &amp; reference workflows live across catalog</li>
+          </ul>
+        </div>
+        <div class="item-tag">Roll-out</div>
+      </div>
+
     </div>
   </div>
 
+  <!-- LARGE REVISIONS -->
+  <div class="lane stream-large">
+    <div class="lane-label">
+      <div class="lane-color-bar"></div>
+      <div class="lane-label-title">MV-led Large Revisions / KNS</div>
+      <div class="lane-label-subtitle">
+        5-step KNS pipeline: MP drives recruiting &amp; alignment, AI
+        EduPlatform drives editorial + automation.
+      </div>
+      <div class="lane-label-stream">Stream · Large Revisions</div>
+    </div>
+
+    <div class="lane-grid">
+
+      <!-- KNS identification -->
+      <div class="roadmap-item"
+           data-quarter-current="1" data-span-current="1"
+           data-quarter-fast="1" data-span-fast="1">
+        <div class="item-title">KNS course identification &amp; recruiting</div>
+        <div class="item-body">
+          <ul>
+            <li>QM algorithm surfaces at-risk courses</li>
+            <li>Automated recruiting &amp; broadcast templates</li>
+          </ul>
+        </div>
+        <div class="item-tag">MP</div>
+      </div>
+
+      <!-- AI Editor v1 in KNS -->
+      <div class="roadmap-item"
+           data-quarter-current="2" data-span-current="1"
+           data-quarter-fast="2" data-span-fast="1">
+        <div class="item-title">AI Editor v1 in KNS editorial step</div>
+        <div class="item-body">
+          <ul>
+            <li>Finalize AI Editor PoC into v1</li>
+            <li>Integrate into Large Revision editorial workflow</li>
+          </ul>
+        </div>
+        <div class="item-tag">AI EduPlatform</div>
+      </div>
+
+      <!-- MV-led Large Revisions live -->
+      <div class="roadmap-item"
+           data-quarter-current="3" data-span-current="1"
+           data-quarter-fast="3" data-span-fast="2">
+        <div class="item-title">MV-led Large Revisions live</div>
+        <div class="item-body">
+          <ul>
+            <li>End-to-end Large Revision flow live for MV teams</li>
+            <li>Dashboards for KNS throughput &amp; quality</li>
+          </ul>
+        </div>
+        <div class="item-tag">Go-Live</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PLATFORM & DATA / TEAQ — MOVED UP -->
+  <div class="lane stream-platform">
+    <div class="lane-label">
+      <div class="lane-color-bar"></div>
+      <div class="lane-label-title">Platform, Data &amp; TEAQ Replacement</div>
+      <div class="lane-label-subtitle">
+        Fonto and content pipelines, LMS/PLF migrations, and TEAQ decommissioning.
+      </div>
+      <div class="lane-label-stream">Stream · Platform &amp; Data</div>
+    </div>
+
+    <div class="lane-grid">
+
+      <!-- Fonto pipelines -->
+      <div class="roadmap-item"
+           data-quarter-current="1" data-span-current="1"
+           data-quarter-fast="1" data-span-fast="1">
+        <div class="item-title">Fonto &amp; post-MVP pipelines</div>
+        <div class="item-body">
+          <ul>
+            <li>Complete key Fonto features</li>
+            <li>Stabilize post-MVP content ingestion &amp; export</li>
+          </ul>
+        </div>
+        <div class="item-tag">Editor Platform</div>
+      </div>
+
+      <!-- LMS / PLF migrations -->
+<div class="roadmap-item"
+     data-quarter-current="2" data-span-current="2"
+     data-quarter-fast="2" data-span-fast="1">
+  <div class="item-title">Content Migration &amp; Auto-Publish</div>
+  <div class="item-body">
+    <ul>
+      <li>Migrate and auto-publish LMS, PLF, Review Books, etc.</li>
+      <li>Auto-publish in sync with Large Revisions</li>
+    </ul>
+  </div>
+  <div class="item-tag">Migrations</div>
+</div>
+
+
+      <!-- TEAQ decommissioning -->
+      <div class="roadmap-item"
+           data-quarter-current="4" data-span-current="1"
+           data-quarter-fast="3" data-span-fast="2"
+           data-accelerated="true">
+        <div class="item-title">TEAQ decommissioning &amp; book automation</div>
+        <div class="item-body">
+          <ul>
+            <li>Auto-create course &amp; review books from source content</li>
+            <li>TEAQ decommissioned in H2 2026 (vs 2027)</li>
+          </ul>
+        </div>
+        <div class="accelerated-pill">
+          <strong>Pulled forward</strong>
+          <span>Early 2027 → H2 2026 with DS</span>
+        </div>
+        <div class="baseline-pill">
+          Baseline timing: <strong>Early 2027</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AUDIOVISUAL & NEW PRODUCTIONS — MOVED DOWN -->
+  <div class="lane stream-av">
+    <div class="lane-label">
+      <div class="lane-color-bar"></div>
+      <div class="lane-label-title">Audiovisual &amp; MV-led New Productions</div>
+      <div class="lane-label-subtitle">
+        Automation for Media Design &amp; Video Coach, plus integrated video solution and MV-led new course production.
+      </div>
+      <div class="lane-label-stream">Stream · AV &amp; New Production</div>
+    </div>
+
+    <div class="lane-grid">
+
+      <!-- AV Automation -->
+      <div class="roadmap-item"
+           data-quarter-current="4" data-span-current="1"
+           data-quarter-fast="3" data-span-fast="2"
+           data-accelerated="true">
+        <div class="item-title">Audiovisual automation &amp; MV-led new productions</div>
+        <div class="item-body">
+          <ul>
+            <li>Automation for key MD / Video Coach tasks</li>
+            <li>MV-led New Course Production workflow live</li>
+            <li>Integrated video solution used for LR &amp; new courses</li>
+          </ul>
+        </div>
+        <div class="accelerated-pill">
+          <strong>Pulled forward</strong>
+          <span>Early 2027 → H2 2026 with DS</span>
+        </div>
+        <div class="baseline-pill">
+          Baseline timing: <strong>Q4 2026 / Early 2027</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+    </div>
+  </div>
 
   <script>
     const body = document.body;
@@ -836,10 +817,5 @@ body.mode-fast .quarter-label.fast-emphasis .quarter-subtitle.mode-fast-label {
     // initial
     applyLayout();
   </script>
-
-
 </body>
 </html>
-
-
-
